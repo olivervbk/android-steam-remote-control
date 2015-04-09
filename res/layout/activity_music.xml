@@ -8,37 +8,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MusicActivity" >
 
-     <Button
+     <ImageButton
         android:id="@+id/music_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="PLAY" />
+        android:src="@android:drawable/ic_media_play" />
      
-     <Button
+     <ImageButton
         android:id="@+id/music_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/music_play"
         android:layout_alignBottom="@id/music_play"
-        android:text="PAUSE" />
+       	android:src="@android:drawable/ic_media_pause" />
      
-     <Button
+     <ImageButton
         android:id="@+id/music_previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/music_pause"
         android:layout_alignBottom="@id/music_play"
-        android:text="PREVIOUS" />
+        android:src="@android:drawable/ic_media_previous" />
      
-     <Button
+     <ImageButton
         android:id="@+id/music_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/music_play"
         android:layout_alignBottom="@id/music_play"
-        android:text="NEXT" />
+        android:src="@android:drawable/ic_media_next"/>
      
      <RelativeLayout
          android:layout_width="fill_parent"

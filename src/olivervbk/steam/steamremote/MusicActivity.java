@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -101,7 +102,7 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 			final SteamMusicAction action = entry.getKey();
 			final Integer buttonId = entry.getValue();
 			
-			final Button button = (Button)findViewById(buttonId);
+			final ImageButton button = (ImageButton)findViewById(buttonId);
 			final Runnable method = new Runnable(){
 				@Override
 				public void run() {
