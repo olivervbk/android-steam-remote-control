@@ -12,8 +12,10 @@ import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 public class MousePadActivity extends AbstractSteamSpaceActivity {
@@ -125,6 +127,9 @@ public class MousePadActivity extends AbstractSteamSpaceActivity {
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		gestureOverlay.setLayoutParams(matchParentParams);
 		gestureOverlay.bringToFront();
+		
+		final ImageButton drawerHandler = (ImageButton) findViewById(R.id.handle);
+		drawerHandler.bringToFront();
 
 		root.addView(gestureOverlay);
 	}
