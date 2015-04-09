@@ -7,7 +7,7 @@ A simple android implementation of the unreleased and undocumented remote contro
 Heavily based on the docs provided by the [SteamDatabase\RemoteControlDocs](https://github.com/SteamDatabase/RemoteControlDocs).
 Great work from those guys.
 
-This project is currently being tested on Android 5 (Lollipop) and uses Androids customization of the Apaches HttpClient (which is kinda deprecated).
+This project is currently being tested on Android 5 (Lollipop) and uses Androids customization of the Apache HttpClient (which is currently deprecated...).
 
 #####Working (kind of):
 * authorization of remote control (must confirm in bigpicture manually)
@@ -25,3 +25,9 @@ This project is currently being tested on Android 5 (Lollipop) and uses Androids
 #####Future
 * keyboard input (sequences and specific keys)
 * understanding the stream request (help appreciated)
+
+
+#### Steam how-to:
+1. Open steam with 'steam -bigpicture -enableremotecontrol'
+2. Connect to a decent wifi network that's shared with your computer
+3. Have fun (probably compiling this app)
