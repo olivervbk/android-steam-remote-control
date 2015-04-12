@@ -1,4 +1,4 @@
-package olivervbk.steam.steamremote.api;
+package olivervbk.steam.steamremote.api.http;
 
 import java.io.IOException;
 import java.net.Socket;

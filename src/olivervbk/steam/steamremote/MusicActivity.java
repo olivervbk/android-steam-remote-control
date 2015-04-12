@@ -7,8 +7,10 @@ import java.util.Map.Entry;
 
 import org.json.JSONException;
 
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
-import olivervbk.steam.steamremote.api.RemoteApi.SteamMusicAction;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
+import olivervbk.steam.steamremote.api.SteamRemoteManager.SteamMusicAction;
 import olivervbk.steam.steamremote.api.SteamMusicInfo;
 import olivervbk.steam.steamremote.api.SteamMusicMode;
 import olivervbk.steam.steamremote.api.SteamRemoteException;
@@ -52,7 +54,7 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 			
 			@Override
 			public void run() {
-				final RemoteApi instance = RemoteApi.getInstance();
+				final IRemoteManager instance = RemoteApi.getInstance();
 				try {
 					final double volume = instance.volume();
 					final double newVolume;
@@ -92,13 +94,13 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_music);
 		
-		final Map<RemoteApi.SteamMusicAction, Integer> buttonIdentifierMap = new HashMap<>();
+		final Map<SteamRemoteManager.SteamMusicAction, Integer> buttonIdentifierMap = new HashMap<>();
 		buttonIdentifierMap.put(SteamMusicAction.NEXT, R.id.music_next);
 		buttonIdentifierMap.put(SteamMusicAction.PAUSE, R.id.music_pause);
 		buttonIdentifierMap.put(SteamMusicAction.PLAY, R.id.music_play);
 		buttonIdentifierMap.put(SteamMusicAction.PREVIOUS, R.id.music_previous);
 		
-		for (Entry<RemoteApi.SteamMusicAction, Integer> entry : buttonIdentifierMap.entrySet()) {
+		for (Entry<SteamRemoteManager.SteamMusicAction, Integer> entry : buttonIdentifierMap.entrySet()) {
 			final SteamMusicAction action = entry.getKey();
 			final Integer buttonId = entry.getValue();
 			
@@ -106,7 +108,7 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 			final Runnable method = new Runnable(){
 				@Override
 				public void run() {
-					RemoteApi instance = RemoteApi.getInstance();
+					IRemoteManager instance = RemoteApi.getInstance();
 					try {
 						instance.music(action);
 						updateInfoNonUi();
@@ -164,7 +166,7 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 
 			@Override
 			public void run() {
-				final RemoteApi instance = RemoteApi.getInstance();
+				final IRemoteManager instance = RemoteApi.getInstance();
 				try {
 					final SteamMusicMode musicMode = instance.musicMode(looped, shuffled);
 					final Runnable uiUpdater = new Runnable() {
@@ -187,7 +189,7 @@ public class MusicActivity extends AbstractSteamSpaceActivity {
 	}
 	
 	private void updateInfoNonUi() {
-		final RemoteApi instance = RemoteApi.getInstance();
+		final IRemoteManager instance = RemoteApi.getInstance();
 		try {
 			final SteamMusicInfo musicInfo = instance.music();
 			final Runnable uiUpdater = new Runnable() {

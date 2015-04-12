@@ -6,7 +6,9 @@ import java.util.Map.Entry;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -62,7 +64,7 @@ public abstract class AbstractSteamSpaceActivity extends Activity {
 
 					@Override
 					public void run() {
-						final RemoteApi instance = RemoteApi.getInstance();
+						final IRemoteManager instance = RemoteApi.getInstance();
 						final int delayCounter = instance.getDelayCounter();
 						delayDisp.setTitle("" + delayCounter + " ms");
 					}

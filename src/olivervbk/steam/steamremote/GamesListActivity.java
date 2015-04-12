@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
 import olivervbk.steam.steamremote.api.SteamGame;
 import olivervbk.steam.steamremote.api.SteamRemoteException;
 import android.app.AlertDialog;
@@ -65,7 +67,7 @@ public class GamesListActivity extends AbstractSteamSpaceActivity {
 		final Runnable steamGamesObtainer = new Runnable() {
 			@Override
 			public void run() {
-				final RemoteApi instance = RemoteApi.getInstance();
+				final IRemoteManager instance = RemoteApi.getInstance();
 
 				final List<SteamGame> games;
 				try {
@@ -200,7 +202,7 @@ public class GamesListActivity extends AbstractSteamSpaceActivity {
 
 									@Override
 									public void run() {
-										final RemoteApi instance = RemoteApi.getInstance();
+										final IRemoteManager instance = RemoteApi.getInstance();
 										
 										final int steamKey = game.getSteamKey();
 										final String steamKeyStr = Integer.toString(steamKey);

@@ -5,8 +5,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.json.JSONException;
 
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
-import olivervbk.steam.steamremote.api.RemoteApi.SteamMouseButton;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
+import olivervbk.steam.steamremote.api.SteamRemoteManager.SteamMouseButton;
 import olivervbk.steam.steamremote.api.SteamRemoteException;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
@@ -45,7 +47,7 @@ public class MousePadActivity extends AbstractSteamSpaceActivity {
 						// Clear?
 						//mouseMoveQueue.clear();
 						
-						final RemoteApi instance = RemoteApi.getInstance();
+						final IRemoteManager instance = RemoteApi.getInstance();
 
 						try {
 							if (lastPoint.isClick()) {

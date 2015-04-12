@@ -1,4 +1,4 @@
-package olivervbk.steam.steamremote.api;
+package olivervbk.steam.steamremote.api.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -262,10 +262,5 @@ System.setProperty(
 		HttpEntity responseEntity = response.getEntity();
 		final String responseString = EntityUtils.toString(responseEntity);
 		return new Pair<>(responseString, response);
-	}
-	
-	enum HttpMethod {
-		GET(), POST(), PUT(), DELETE();
-
 	}
 }

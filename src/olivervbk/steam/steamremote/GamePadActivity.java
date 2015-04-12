@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.json.JSONException;
 
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
-import olivervbk.steam.steamremote.api.RemoteApi.SteamButton;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
+import olivervbk.steam.steamremote.api.SteamRemoteManager.SteamButton;
 import olivervbk.steam.steamremote.api.SteamRemoteException;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -23,7 +26,7 @@ public class GamePadActivity extends AbstractSteamSpaceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gamepad);
 		
-		Map<RemoteApi.SteamButton, Integer> buttonIdentifierMap = new HashMap<>();
+		Map<SteamRemoteManager.SteamButton, Integer> buttonIdentifierMap = new HashMap<>();
 		buttonIdentifierMap.put(SteamButton.A, R.id.gamepad_a);
 		buttonIdentifierMap.put(SteamButton.B, R.id.gamepad_b);
 		buttonIdentifierMap.put(SteamButton.DOWN, R.id.gamepad_down);
@@ -36,7 +39,7 @@ public class GamePadActivity extends AbstractSteamSpaceActivity {
 		buttonIdentifierMap.put(SteamButton.X, R.id.gamepad_x);
 		buttonIdentifierMap.put(SteamButton.Y, R.id.gamepad_y);
 		
-		for (Entry<RemoteApi.SteamButton, Integer> entry : buttonIdentifierMap.entrySet()) {
+		for (Entry<SteamRemoteManager.SteamButton, Integer> entry : buttonIdentifierMap.entrySet()) {
 			final SteamButton steamButton = entry.getKey();
 			final Integer buttonId = entry.getValue();
 			
@@ -44,7 +47,7 @@ public class GamePadActivity extends AbstractSteamSpaceActivity {
 			final Runnable method = new Runnable(){
 				@Override
 				public void run() {
-					RemoteApi instance = RemoteApi.getInstance();
+					IRemoteManager instance = RemoteApi.getInstance();
 					try {
 						instance.button(steamButton);
 						return;

@@ -5,9 +5,12 @@ import java.io.IOException;
 import org.json.JSONException;
 
 import olivervbk.steam.steamremote.R;
-import olivervbk.steam.steamremote.api.HttpConnectionManagerException;
+import olivervbk.steam.steamremote.api.DummyManager;
+import olivervbk.steam.steamremote.api.IRemoteManager;
 import olivervbk.steam.steamremote.api.RemoteApi;
+import olivervbk.steam.steamremote.api.SteamRemoteManager;
 import olivervbk.steam.steamremote.api.SteamRemoteException;
+import olivervbk.steam.steamremote.api.http.HttpConnectionManagerException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -26,7 +29,7 @@ public class MainActivity extends Activity {
 	private static final String PREFERENCE_STEAM_ADDRESS = "steamAddress";
 
 	private boolean isStarted = false;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStart() {
 		// do not query again on reinitialize
-		if(!isStarted){
+		if (!isStarted) {
 			isStarted = true;
 			querySteamAddress(this);
 		}
@@ -52,19 +55,25 @@ public class MainActivity extends Activity {
 		}
 		logMessage("Initializing RemoteApi on address:" + steamAddress + "\n");
 
-		RemoteApi remoteApi;
+		IRemoteManager remoteManager;
 		try {
-			remoteApi = new RemoteApi(steamAddress);
+			if ("dummy".equalsIgnoreCase(steamAddress)) {
+				remoteManager = DummyManager.createDummyImplementation();
+			} else {
+				remoteManager = new SteamRemoteManager(steamAddress);
+			}
 		} catch (HttpConnectionManagerException e1) {
 			e1.printStackTrace();
 			logMessage("RemoteApi error: " + e1.getMessage() + "\n");
 			return;
 		}
+		
+		RemoteApi.setInstance(remoteManager);
 
 		logMessage("Checking authorization.\n");
 		boolean authorized;
 		try {
-			authorized = remoteApi.authorized();
+			authorized = remoteManager.authorized();
 		} catch (IOException | JSONException e) {
 			logMessage("isAuthError: " + e.getMessage() + "\n");
 			return;
@@ -74,7 +83,7 @@ public class MainActivity extends Activity {
 			logMessage("Trying to authenticate.\n");
 
 			try {
-				remoteApi.authorization("12345678", "oliver");
+				remoteManager.authorization("12345678", "oliver");
 			} catch (SteamRemoteException e) {
 				logMessage("SteamError: " + e.getMessage() + "\n");
 				return;
@@ -115,7 +124,7 @@ public class MainActivity extends Activity {
 						final Editor edit = sharedPreferences.edit();
 						edit.putString(PREFERENCE_STEAM_ADDRESS, steamAddress);
 						edit.commit();
-						
+
 						final Runnable runnable = new Runnable() {
 
 							@Override
